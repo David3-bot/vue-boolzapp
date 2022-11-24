@@ -9,4 +9,5 @@
 .container {
     background-color: lightslategray;
     height: 100vh;
+    width: auto;
 }
