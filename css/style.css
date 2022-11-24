@@ -1,0 +1,12 @@
+.navbar {
+    position: absolute;
+    width: 100%;
+    background-color: #1abc9c;
+    z-index: -10;
+    height: 10rem;
+}
+
+.container {
+    background-color: lightslategray;
+    height: 100vh;
+}
