@@ -11,20 +11,20 @@ createApp({
         return {
             utenti: [{
                 name: 'Michele',
-                avatar: 'imgs/avatar_1.jpg',
+                avatar: 'avatar_1.jpg',
                 visible: true,
                 messages: [{
-                    date: '10/01/2020 15:30:55',
+                    date: luxon.DateTime.fromFormat('10/01/2020 15:50:00', 'dd/LL/yyyy HH:mm:ss').toFormat('dd/MM/yyyy HH:mm:ss'),
                     message: 'Hai portato a spasso il cane?',
                     status: 'sent'
                 },
                 {
-                    date: '10/01/2020 15:50:00',
+                    date: luxon.DateTime.fromFormat('10/01/2020 15:50:00', 'dd/LL/yyyy HH:mm:ss').toFormat('dd/MM/yyyy HH:mm:ss'),
                     message: 'Ricordati di dargli da mangiare',
                     status: 'sent'
                 },
                 {
-                    date: '10/01/2020 16:15:22',
+                    date: luxon.DateTime.fromFormat('10/01/2020 15:50:00', 'dd/LL/yyyy HH:mm:ss').toFormat('dd/MM/yyyy HH:mm:ss'),
                     message: 'Tutto fatto!',
                     status: 'received'
                 }
@@ -32,20 +32,20 @@ createApp({
             },
             {
                 name: 'Fabio',
-                avatar: 'imgs/avatar_2.jpg',
+                avatar: 'avatar_2.jpg',
                 visible: true,
                 messages: [{
-                    date: '20/03/2020 16:30:00',
+                    date: luxon.DateTime.fromFormat('10/01/2020 15:50:00', 'dd/LL/yyyy HH:mm:ss').toFormat('dd/MM/yyyy HH:mm:ss'),
                     message: 'Ciao come stai?',
                     status: 'sent'
                 },
                 {
-                    date: '20/03/2020 16:30:55',
+                    date: luxon.DateTime.fromFormat('10/01/2020 15:50:00', 'dd/LL/yyyy HH:mm:ss').toFormat('dd/MM/yyyy HH:mm:ss'),
                     message: 'Bene grazie! Stasera ci vediamo?',
                     status: 'received'
                 },
                 {
-                    date: '20/03/2020 16:35:00',
+                    date: luxon.DateTime.fromFormat('10/01/2020 15:50:00', 'dd/LL/yyyy HH:mm:ss').toFormat('dd/MM/yyyy HH:mm:ss'),
                     message: 'Mi piacerebbe ma devo andare a fare la spesa.',
                     status: 'received'
                 }
@@ -53,20 +53,20 @@ createApp({
             },
             {
                 name: 'Samuele',
-                avatar: 'imgs/avatar_3.jpg',
+                avatar: 'avatar_3.jpg',
                 visible: true,
                 messages: [{
-                    date: '28/03/2020 10:10:40',
+                    date: luxon.DateTime.fromFormat('10/01/2020 15:50:00', 'dd/LL/yyyy HH:mm:ss').toFormat('dd/MM/yyyy HH:mm:ss'),
                     message: 'La Marianna va in campagna',
                     status: 'received'
                 },
                 {
-                    date: '28/03/2020 10:20:10',
+                    date: luxon.DateTime.fromFormat('10/01/2020 15:50:00', 'dd/LL/yyyy HH:mm:ss').toFormat('dd/MM/yyyy HH:mm:ss'),
                     message: 'Sicuro di non aver sbagliato chat?',
                     status: 'sent'
                 },
                 {
-                    date: '28/03/2020 16:15:22',
+                    date: luxon.DateTime.fromFormat('10/01/2020 15:50:00', 'dd/LL/yyyy HH:mm:ss').toFormat('dd/MM/yyyy HH:mm:ss'),
                     message: 'Ah scusa!',
                     status: 'received'
                 }
@@ -74,26 +74,56 @@ createApp({
             },
             {
                 name: 'Luisa',
-                avatar: 'imgs/avatar_4.jpg',
+                avatar: 'avatar_4.jpg',
                 visible: true,
                 messages: [{
-                    date: '10/01/2020 15:30:55',
+                    date: luxon.DateTime.fromFormat('10/01/2020 15:50:00', 'dd/LL/yyyy HH:mm:ss').toFormat('dd/MM/yyyy HH:mm:ss'),
                     message: 'Lo sai che ha aperto una nuova pizzeria?',
                     status: 'sent'
                 },
                 {
-                    date: '10/01/2020 15:50:00',
+                           date: luxon.DateTime.fromFormat('10/01/2020 15:50:00', 'dd/LL/yyyy HH:mm:ss').toFormat('dd/MM/yyyy HH:mm:ss'),
                     message: 'Si, ma preferirei andare al cinema',
                     status: 'received'
                 }
                 ],
             },
-            ]
+            ],
+            selectedUser: -1,
+            newMex: "",
         };
 
     },
     methods: {
+        nuovoMessaggioInviato() {
 
-    }
+
+            this.utenteSelezionato.messages.push({
+                date: '10/01/2020 15:50:00',
+                message: this.messaggioInviato,
+                status: 'sent'
+            })
+
+            setTimeout(() => {
+                this.utenteSelezionato.messages.push({
+                    date: '10/01/2020 15:50:00',
+                    message: 'Aiutami.',
+                    status: 'received'
+                })
+            }, 2000);
+
+            this.messaggioInviato = ""
+        },
+
+        ricercaMessaggioChat() {
+            console.log(this.ricercaMessaggio)
+
+        }
+
+    },
+    
+    beforeMount() {
+        this.utenteSelezionato = this.utenti[0]
+    },
 
 }).mount("#app")

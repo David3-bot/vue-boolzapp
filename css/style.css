@@ -11,3 +11,13 @@
     height: 100vh;
     width: auto;
 }
+
+.user-bar {
+    background-color: rgb(216, 222, 227);
+}
+
+img {
+    width: 50px;
+    display: block;
+    border-radius: 50%;
+}

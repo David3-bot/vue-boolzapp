@@ -11,20 +11,126 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.1.0/build/global/luxon.min.js"></script>
     <title>Prozzapp</title>
 </head>
 
 <body>
     <section id="app">
         <header>
-            <nav class="navbar"></nav>
+
+            <div class="main-container d-flex py-3">
+
+                <div class="sx-row">
+                    <div class="d-flex justify-content-between align-items-center p-2 pb-4">
+                        <div class="d-flex align-items-center">
+                            <div class="me-2">
+                                <img src="img/avatar_8.jpg" alt="">
+                            </div>
+                            <div>Davide</div>
+                        </div>
+                        <div class="d-flex gap-3 pe-3">
+                            <a href="#" class="text-secondary"><i class="fa-solid fa-circle-notch"></i></a>
+                            <a href="" class="text-secondary"><i class="fa-solid fa-message"></i></a>
+                            <a href="" class="text-secondary"><i class="fa-solid fa-ellipsis-vertical"></i></a>
+                        </div>
+                    </div>
+                    <div class="d-flex bg-alert p-4">
+                        <div class=""><i class="fa-solid fa-bell-slash"></i></div>
+                        <div>
+                            <div class="fw-semibold">Nuovi messaggi</div>
+                            <div class="text-secondary"><u>Notifiche desktop</u></div>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="my-2 ms-2 p-2 border rounded-start bg-white">
+                            <a href="#" class="text-secondary"><i class="fa-solid fa-magnifying-glass"></i></a>
+                        </div>
+                        <div class="">
+                            <form>
+                                <input type="text" class="p-2" placeholder="Cerca o inizia chat" v-model="search">
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class=" flex-grow-1 overflow-auto d-flex flex-column">
+        
+                        <div v-for="(utente, i) in utenti" @click="utenteSelezionato = utente">
+                           
+            
+                            <div class="d-flex align-items-center">
+                                <div>
+                                    <img :src="`./img/${utenti.avatar}`" alt="">
+                                </div>
+                                <div class="flex-grow-1">
+                                    <span class="p-2">{{utente.name}}</span>
+                                    <div class="small px-2 text-color">ultimo messaggio:</div>
+                                </div>
+                                <small class="align-self-baseline text-color">12:00</small>
+                            </div>
+                        </div>
+                    </div>
 
         </header>
 
-        <main>
-            <div class="container"></div>
-        </main>
+        <div class="d-flex flex-column">
+            <div @click="selectedUser = users" v-for="(users,i) in searchUserChat" :key="i + users.name">
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex">
+                        <div class="image px-2">
+                            <img v-bind:src="users.avatar" alt="">
+                        </div>
+                        <div>
+                            <div class="fw-semibold">{{users.name}}</div>
+                            <div class="small text-secondary">{{users.messages[0].message}}</div>
+                        </div>
+                    </div>
+                    <div class="small text-secondary pe-2">{{users.messages[0].date}}</div>
+                </div>
+            </div>
+        </div>
 
+        <div class="p-2">
+            <form class="container">
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
+                    <input type="text" class="form-control small" placeholder="nuova chat">
+                </div>
+
+                <div class="text-secondary">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <i class="fa-solid fa-paperclip px-3"></i>
+                    <i class="fa-solid fa-ellipsis-vertical "></i>
+                </div>
+        
+                <div class="flex-grow-1 d-flex flex-column">
+                    
+                    <div
+                        class="d-flex justify-content-between align-items-center bg-hat-nav p-2 bordino-naw-chat">
+                        <div>
+                            <img :src="`imgs/avatar${utenteSelezionato.avatar}.jpg`" alt="">
+                            <span class="small px-3">{{utenteSelezionato.name}}</span>
+                        </div>
+                       
+
+                    </div>
+                    
+                    <div class="overflow-auto">
+                        <div class="d-flex flex-column">
+                            <div v-bind:class="{'newMessage' : oggettoMessaggio.status === 'sent'}"v-for="(oggettoMessaggio) in utenteSelezionato.messages ">
+                            {{oggettoMessaggio.message}}
+                            </div>
+                        </div>
+                    </div>
+
+            </form>
+
+            
+        </div>
+
+        
+      
+       
 
         <footer></footer>
 
